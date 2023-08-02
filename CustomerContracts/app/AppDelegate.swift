@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  CustomerContracts
 //
-//  Created by Emre Yeşilyurt on 2.08.2023.
+//  Created by Habip Yeşilyurt on 2.08.2023.
 //
 
 import UIKit
