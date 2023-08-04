@@ -105,13 +105,11 @@ extension InvoiceListVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        viewModel.cellForItemAt(at: indexPath, tableView: tableView)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-//        let invoiceDetailVC =  InvoiceDetailVC()
-//        navigationController?.pushViewController(invoiceDetailVC, animated: true)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceTableViewCell", for: indexPath) as! InvoiceTableViewCell
+        cell.delegate = self
+        return cell
+//        viewModel.cellForItemAt(at: indexPath, tableView: tableView)
+        
     }
 }
 
@@ -122,5 +120,16 @@ extension InvoiceListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         15
+    }
+}
+
+
+extension InvoiceListVC: InvoiceTableViewCellDelegate {
+    func didTapButton(in cell: InvoiceTableViewCell) {
+//        guard let indexPath = tableView.indexPath(for: cell) else { return }
+//        let selectedData = yourDataSourceArray[indexPath.row]
+//        let invoiceDetailVC = InvoiceDetailVC(data: selectedData)
+        let invoiceDetailVC =  InvoiceDetailVC()
+        navigationController?.pushViewController(invoiceDetailVC, animated: true)
     }
 }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol InvoiceTableViewCellDelegate: AnyObject {
+    func didTapButton(in cell: InvoiceTableViewCell)
+}
+
 final class InvoiceTableViewCell: UITableViewCell {
     
     @IBOutlet weak var containerView: UIView!
@@ -16,6 +20,8 @@ final class InvoiceTableViewCell: UITableViewCell {
     @IBOutlet weak var contractAccountNumberLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var viewButton: UIButton!
+    
+    weak var delegate: InvoiceTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +52,7 @@ final class InvoiceTableViewCell: UITableViewCell {
     }
     
     @IBAction func viewButtonTapped(_ sender: Any) {
+        delegate?.didTapButton(in: self)
     }
     
 }

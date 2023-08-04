@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F4DF4CD2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CB2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift */; };
+		6F4DF4CE2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CC2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib */; };
+		6F4DF4D02A7CD96000F0B20E /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CF2A7CD96000F0B20E /* CustomHeaderView.swift */; };
 		6F5653F62A7BD2D700675EB4 /* InvoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5653F42A7BD2D700675EB4 /* InvoiceTableViewCell.swift */; };
 		6F5653F72A7BD2D700675EB4 /* InvoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5653F52A7BD2D700675EB4 /* InvoiceTableViewCell.xib */; };
-		6F5653F92A7BD30000675EB4 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5653F82A7BD30000675EB4 /* DesignableView.swift */; };
+		6F5654022A7C623200675EB4 /* InvoiceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5654002A7C623200675EB4 /* InvoiceDetailVC.swift */; };
+		6F5654032A7C623200675EB4 /* InvoiceDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5654012A7C623200675EB4 /* InvoiceDetailVC.xib */; };
 		6FF3978C2A7A998B00C03951 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3978B2A7A998B00C03951 /* AppDelegate.swift */; };
 		6FF3978E2A7A998B00C03951 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3978D2A7A998B00C03951 /* SceneDelegate.swift */; };
 		6FF397952A7A998C00C03951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FF397942A7A998C00C03951 /* Assets.xcassets */; };
@@ -22,9 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F4DF4CB2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailTableViewCell.swift; sourceTree = "<group>"; };
+		6F4DF4CC2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceDetailTableViewCell.xib; sourceTree = "<group>"; };
+		6F4DF4CF2A7CD96000F0B20E /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		6F5653F42A7BD2D700675EB4 /* InvoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTableViewCell.swift; sourceTree = "<group>"; };
 		6F5653F52A7BD2D700675EB4 /* InvoiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceTableViewCell.xib; sourceTree = "<group>"; };
-		6F5653F82A7BD30000675EB4 /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
+		6F5654002A7C623200675EB4 /* InvoiceDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailVC.swift; sourceTree = "<group>"; };
+		6F5654012A7C623200675EB4 /* InvoiceDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceDetailVC.xib; sourceTree = "<group>"; };
 		6FF397882A7A998B00C03951 /* CustomerContracts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomerContracts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF3978B2A7A998B00C03951 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FF3978D2A7A998B00C03951 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,9 +57,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F4DF4CA2A7CCB7E00F0B20E /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				6F4DF4CB2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift */,
+				6F4DF4CC2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		6F5653EF2A7B938800675EB4 /* detail */ = {
 			isa = PBXGroup;
 			children = (
+				6F4DF4CA2A7CCB7E00F0B20E /* cell */,
+				6F5654002A7C623200675EB4 /* InvoiceDetailVC.swift */,
+				6F5654012A7C623200675EB4 /* InvoiceDetailVC.xib */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -99,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				6F5653EF2A7B938800675EB4 /* detail */,
-				6FF397A72A7A9AEF00C03951 /* invoiceList */,
+				6FF397A72A7A9AEF00C03951 /* list */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -136,7 +156,7 @@
 			path = app;
 			sourceTree = "<group>";
 		};
-		6FF397A72A7A9AEF00C03951 /* invoiceList */ = {
+		6FF397A72A7A9AEF00C03951 /* list */ = {
 			isa = PBXGroup;
 			children = (
 				6FF397B92A7AD79800C03951 /* cell */,
@@ -144,14 +164,14 @@
 				6FF397AD2A7A9B5500C03951 /* InvoiceListVC.xib */,
 				6FF397B72A7AD4C300C03951 /* InvoiceListVM.swift */,
 			);
-			path = invoiceList;
+			path = list;
 			sourceTree = "<group>";
 		};
 		6FF397B42A7AAAE000C03951 /* components */ = {
 			isa = PBXGroup;
 			children = (
 				6FF397B52A7AAB0000C03951 /* CustomView.swift */,
-				6F5653F82A7BD30000675EB4 /* DesignableView.swift */,
+				6F4DF4CF2A7CD96000F0B20E /* CustomHeaderView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -224,6 +244,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FF397AF2A7A9B5500C03951 /* InvoiceListVC.xib in Resources */,
+				6F4DF4CE2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib in Resources */,
+				6F5654032A7C623200675EB4 /* InvoiceDetailVC.xib in Resources */,
 				6F5653F72A7BD2D700675EB4 /* InvoiceTableViewCell.xib in Resources */,
 				6FF397952A7A998C00C03951 /* Assets.xcassets in Resources */,
 			);
@@ -238,13 +260,15 @@
 			files = (
 				6FF397AE2A7A9B5500C03951 /* InvoiceListVC.swift in Sources */,
 				6FF397B12A7AA8C100C03951 /* UIColor+Ext.swift in Sources */,
+				6F4DF4CD2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift in Sources */,
 				6FF3978C2A7A998B00C03951 /* AppDelegate.swift in Sources */,
 				6FF397B82A7AD4C300C03951 /* InvoiceListVM.swift in Sources */,
 				6FF397B62A7AAB0000C03951 /* CustomView.swift in Sources */,
 				6F5653F62A7BD2D700675EB4 /* InvoiceTableViewCell.swift in Sources */,
 				6FF3978E2A7A998B00C03951 /* SceneDelegate.swift in Sources */,
+				6F4DF4D02A7CD96000F0B20E /* CustomHeaderView.swift in Sources */,
 				6FF397B32A7AAA0E00C03951 /* BaseVC.swift in Sources */,
-				6F5653F92A7BD30000675EB4 /* DesignableView.swift in Sources */,
+				6F5654022A7C623200675EB4 /* InvoiceDetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

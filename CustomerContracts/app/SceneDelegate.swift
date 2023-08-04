@@ -18,7 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let invoiceListVC = InvoiceListVC()
         let navigationController = UINavigationController(rootViewController: invoiceListVC)
         window?.rootViewController = navigationController
-        window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
     }
 
