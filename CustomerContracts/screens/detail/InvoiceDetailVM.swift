@@ -8,50 +8,20 @@
 import UIKit
 
 protocol InvoiceDetailVMProtocol {
-    func viewWillAppear()
-    func viewDidLoad()
-    func viewForHeaderInSection(tableView: UITableView, section: Int) -> UIView?
-    func numberOfRowsInSection() -> Int
-    func cellForItemAt(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell
+    var delegate : InvoiceDetailVMDelegate? { get set }
+    func getCompanyInvoice(at index: Int) -> Invoice?
+}
+
+protocol InvoiceDetailVMDelegate : AnyObject {
+    func gameDetailLoaded()
 }
 
 
-final class InvoiceDetailVM {
-    private weak var view: InvoiceDetailViewProtocol?
+final class InvoiceDetailVM: InvoiceDetailVMProtocol {
+    weak var delegate: InvoiceDetailVMDelegate?
+    public var invoices: [Invoice] = []
     
-    init(view: InvoiceDetailViewProtocol) {
-        self.view = view
-    }
-}
-
-
-extension InvoiceDetailVM: InvoiceDetailVMProtocol {
-    func viewWillAppear() {
-        view?.prepareCustomView()
-        view?.prepareNavigationItem()
-        view?.prepareErrorLabel()
-    }
-    
-    func viewDidLoad() {
-        view?.preparePlumbingDetailView()
-        view?.prepareDebtContainerView()
-        view?.prepareTableView()
-    }
-    
-    func numberOfRowsInSection() -> Int {
-        3
-    }
-    
-    func viewForHeaderInSection(tableView: UITableView, section: Int) -> UIView? {
-        if section == 0 {
-            let headerView = CustomHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 46.0))
-            return headerView
-        }
-        return nil
-    }
-    
-    func cellForItemAt(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceDetailTableViewCell", for: indexPath) as! InvoiceDetailTableViewCell
-        return cell
+    func getCompanyInvoice(at index: Int) -> Invoice? {
+        self.invoices[index]
     }
 }

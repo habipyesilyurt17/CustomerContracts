@@ -7,15 +7,6 @@
 
 import UIKit
 
-protocol InvoiceDetailViewProtocol: AnyObject {
-    func prepareCustomView()
-    func prepareNavigationItem()
-    func prepareErrorLabel()
-    func preparePlumbingDetailView()
-    func prepareDebtContainerView()
-    func prepareTableView()
-}
-
 final class InvoiceDetailVC: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var tcTextField: UITextField!
@@ -34,20 +25,39 @@ final class InvoiceDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
   
     let customView = CustomView()
-    private lazy var viewModel = InvoiceDetailVM(view: self)
+    
+    var choosenList: List?
+    var choosenInvoices: [Invoice] = []
+    private var viewModel = InvoiceDetailVM()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.viewWillAppear()
+        prepareCustomView()
+        prepareNavigationItem()
+        prepareErrorLabel()
     }
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
+        preparePlumbingDetailView()
+        prepareDebtContainerView()
+        prepareTableView()
+        prepareListLabel()
     }
 }
 
-extension InvoiceDetailVC: InvoiceDetailViewProtocol {
+
+//Mark: - UI
+extension InvoiceDetailVC {
+    private func prepareListLabel() {
+        companyLabel.text = choosenList?.company
+        addressLabel.text = choosenList?.address
+        installationNumberLabel.text = choosenList?.installationNumber
+        contractAccountNumberLabel.text = choosenList?.contractAccountNumber
+        amountLabel.text = choosenList?.amount
+        contractContentLabel.text = "Seçili sözleşme hesabınıza ait \(choosenInvoices.count) adet ödenmemiş fatura bulunmaktadır."
+    }
+    
     func prepareCustomView() {
         customView.translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(customView)
@@ -121,16 +131,22 @@ extension InvoiceDetailVC: InvoiceDetailViewProtocol {
 
 extension InvoiceDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        viewModel.viewForHeaderInSection(tableView: tableView, section: section)
+        if section == 0 {
+            let headerView = CustomHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 46.0))
+            return headerView
+        }
+        return nil
     }
 }
 
 extension InvoiceDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRowsInSection()
+        choosenInvoices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        viewModel.cellForItemAt(at: indexPath, tableView: tableView)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceDetailTableViewCell", for: indexPath) as! InvoiceDetailTableViewCell
+        cell.configureCell(invoice: choosenInvoices[indexPath.row])
+        return cell
     }
 }

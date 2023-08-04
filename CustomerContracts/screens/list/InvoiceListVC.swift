@@ -7,35 +7,41 @@
 
 import UIKit
 
-protocol InvoiceListViewProtocol: AnyObject {
-    func prepareCustomView()
-    func prepareTitleLabel()
-    func preparePaymentNotificationView()
-    func prepareTableView()
-}
-
-class InvoiceListVC: UIViewController {
+final class InvoiceListVC: UIViewController {
     @IBOutlet weak var paymentNotificationView: UIView!
     @IBOutlet weak var paymentNotificationLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     let customView = CustomView()
     let titleLabel = UILabel()
-    private lazy var viewModel = InvoiceListVM(view: self)
-    
+
+    private var viewModel = InvoiceListVM()
+    public var contractInvoices : InvoiceResponseModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        prepareCustomView()
+        prepareTitleLabel()
+        preparePaymentNotificationView()
+        prepareTableView()
+        viewModel.delegate = self
+        viewModel.fetchInvoices()
+        contractInvoices = viewModel.invoices
     }
 
-        
 }
 
-extension InvoiceListVC: InvoiceListViewProtocol {
+extension InvoiceListVC: InvoiceListVMDelegate {
+    func invoicesLoaded() {
+        tableView.reloadData()
+        contractInvoices = viewModel.invoices
+        preparePaymentNotificationView()
+    }
+}
+
+
+//Mark: - UI
+extension InvoiceListVC {
     func prepareTableView() {
         let cellNib = UINib(nibName: "InvoiceTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "InvoiceTableViewCell")
@@ -44,7 +50,6 @@ extension InvoiceListVC: InvoiceListViewProtocol {
         tableView.separatorStyle = .none
         tableView.rowHeight = 346
     }
-    
     
     func prepareCustomView() {
         customView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,28 +93,26 @@ extension InvoiceListVC: InvoiceListViewProtocol {
 
         view.addSubview(paymentNotificationView)
         
-        let totalPrice = "12.454,10"
-        let totalPriceCount = 5
+        guard let invoices = contractInvoices else { return }
+        
+        let totalPrice =  invoices.totalPrice  //"12.454,10"
+        let totalPriceCount = invoices.totalPriceCount //5
         paymentNotificationLabel.text = "Tüm sözleşme hesaplarınıza ait \(totalPriceCount) adet fatura bulunmaktadır."
         totalPriceLabel.text = "₺ \(totalPrice)"
     }
 }
 
 extension InvoiceListVC: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        viewModel.numberOfSections()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        viewModel.getInvoiceCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceTableViewCell", for: indexPath) as! InvoiceTableViewCell
+        guard let model = viewModel.getCompanyList(at: indexPath.row) else { return UITableViewCell() }
         cell.delegate = self
+        cell.configureCell(item: model)
         return cell
-//        viewModel.cellForItemAt(at: indexPath, tableView: tableView)
-        
     }
 }
 
@@ -117,19 +120,20 @@ extension InvoiceListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.rowHeight
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        15
-    }
 }
 
 
 extension InvoiceListVC: InvoiceTableViewCellDelegate {
     func didTapButton(in cell: InvoiceTableViewCell) {
-//        guard let indexPath = tableView.indexPath(for: cell) else { return }
-//        let selectedData = yourDataSourceArray[indexPath.row]
-//        let invoiceDetailVC = InvoiceDetailVC(data: selectedData)
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let selectedList = contractInvoices?.list[indexPath.row]
         let invoiceDetailVC =  InvoiceDetailVC()
+        invoiceDetailVC.choosenList = selectedList
+        
+        let filteredInvoices = contractInvoices?.invoices.filter { invoice in
+            return invoice.installationNumber == selectedList?.installationNumber
+        }
+        invoiceDetailVC.choosenInvoices = filteredInvoices ?? []
         navigationController?.pushViewController(invoiceDetailVC, animated: true)
     }
 }

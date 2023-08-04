@@ -14,7 +14,10 @@ class InvoiceDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var paymentButton: UIButton!
     
     
-    
+    func configureCell(invoice: Invoice) {
+        dueDateLabel.text = invoice.dueDate
+        amountLabel.text = invoice.amount
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

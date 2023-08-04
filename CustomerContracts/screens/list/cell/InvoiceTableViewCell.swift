@@ -29,6 +29,14 @@ final class InvoiceTableViewCell: UITableViewCell {
         prepareViewButton()
     }
     
+    func configureCell(item: List) {
+        companyLabel.text = item.company
+        addressLabel.text = item.address
+        installationNumberLabel.text = item.installationNumber
+        contractAccountNumberLabel.text = item.contractAccountNumber
+        amountLabel.text = item.amount
+    }
+    
     private func prepareViewButton() {
         let gradientColor = [
             UIColor(red: 0.99, green: 0.93, blue: 0.31, alpha: 1.00).cgColor,
@@ -55,4 +63,12 @@ final class InvoiceTableViewCell: UITableViewCell {
         delegate?.didTapButton(in: self)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        companyLabel.text = nil
+        addressLabel.text = nil
+        installationNumberLabel.text = nil
+        contractAccountNumberLabel.text = nil
+        amountLabel.text = nil
+    }
 }
