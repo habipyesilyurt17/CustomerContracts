@@ -1,6 +1,10 @@
 # CustomerContracts
 Apps architecture is MVVM with Delegation Pattern.
 
+# Requirements
+- Xcode 14.0.1
+- iOS16+
+
 # Architecture
 - MVVM
 
