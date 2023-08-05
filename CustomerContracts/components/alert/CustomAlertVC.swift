@@ -55,11 +55,7 @@ extension CustomAlertVC {
     }
     
     private func prepateOkButton() {
-        let gradientColor = [
-            UIColor(red: 0.99, green: 0.93, blue: 0.31, alpha: 1.00).cgColor,
-            UIColor(red: 0.93, green: 0.65, blue: 0.25, alpha: 1.00).cgColor
-        ]
-        okButton.backgroundColor = UIColor.gradientColor(from: gradientColor, with: UIScreen.main.bounds)
+        okButton.backgroundColor = UIColor.gradientColor(with: UIScreen.main.bounds)
         okButton.tintColor = .white
         okButton.layer.cornerRadius = 10
     }

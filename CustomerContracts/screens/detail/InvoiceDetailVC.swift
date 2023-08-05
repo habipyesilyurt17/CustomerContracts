@@ -28,7 +28,6 @@ final class InvoiceDetailVC: UIViewController {
     
     var choosenList: List?
     var choosenInvoices: [Invoice] = []
-    private var viewModel = InvoiceDetailVM()
     let maxLength = 11
 
     
@@ -78,13 +77,8 @@ extension InvoiceDetailVC {
     func prepareCustomView() {
         customView.translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(customView)
-        
-        let gradientColor = [
-            UIColor(red: 0.99, green: 0.93, blue: 0.31, alpha: 1.00).cgColor,
-            UIColor(red: 0.93, green: 0.65, blue: 0.25, alpha: 1.00).cgColor
-        ]
-        
-        customView.backgroundColor = UIColor.gradientColor(from: gradientColor, with: UIScreen.main.bounds)
+
+        customView.backgroundColor = UIColor.gradientColor(with: UIScreen.main.bounds)
         
         NSLayoutConstraint.activate([
              customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

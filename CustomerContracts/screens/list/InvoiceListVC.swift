@@ -57,13 +57,8 @@ extension InvoiceListVC {
     func prepareCustomView() {
         customView.translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(customView)
-        
-        let gradientColor = [
-            UIColor(red: 0.99, green: 0.93, blue: 0.31, alpha: 1.00).cgColor,
-            UIColor(red: 0.93, green: 0.65, blue: 0.25, alpha: 1.00).cgColor
-        ]
-        
-        customView.backgroundColor = UIColor.gradientColor(from: gradientColor, with: UIScreen.main.bounds)
+
+        customView.backgroundColor = UIColor.gradientColor(with: UIScreen.main.bounds)
         
         NSLayoutConstraint.activate([
              customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -106,10 +101,6 @@ extension InvoiceListVC {
 }
 
 extension InvoiceListVC: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        346
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.getInvoiceCount()
     }
@@ -123,16 +114,7 @@ extension InvoiceListVC: UITableViewDataSource {
     }
 }
 
-extension InvoiceListVC: UITableViewDelegate {    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView()
-//        footerView.backgroundColor = .clear
-//        return footerView
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 30.0 // Hücreler arasına boşluk eklemek için footer yüksekliği
-//    }
+extension InvoiceListVC: UITableViewDelegate {
 }
 
 

@@ -38,11 +38,7 @@ final class InvoiceTableViewCell: UITableViewCell {
     }
     
     private func prepareViewButton() {
-        let gradientColor = [
-            UIColor(red: 0.99, green: 0.93, blue: 0.31, alpha: 1.00).cgColor,
-            UIColor(red: 0.93, green: 0.65, blue: 0.25, alpha: 1.00).cgColor
-        ]
-        viewButton.backgroundColor = UIColor.gradientColor(from: gradientColor, with: UIScreen.main.bounds)
+        viewButton.backgroundColor = UIColor.gradientColor(with: UIScreen.main.bounds)
         viewButton.tintColor = .white
         viewButton.layer.cornerRadius = 10
 

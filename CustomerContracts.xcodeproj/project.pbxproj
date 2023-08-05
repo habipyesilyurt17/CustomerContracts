@@ -13,7 +13,6 @@
 		6F4DF4CD2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CB2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift */; };
 		6F4DF4CE2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CC2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib */; };
 		6F4DF4D02A7CD96000F0B20E /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CF2A7CD96000F0B20E /* CustomHeaderView.swift */; };
-		6F4DF4D22A7D03CE00F0B20E /* InvoiceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4D12A7D03CE00F0B20E /* InvoiceDetailVM.swift */; };
 		6F4DF4D52A7D1BC700F0B20E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6F4DF4D42A7D1BC700F0B20E /* Alamofire */; };
 		6F4DF4D72A7D1BE600F0B20E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4D62A7D1BE600F0B20E /* NetworkManager.swift */; };
 		6F4DF4D92A7D1CD400F0B20E /* ResultTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4D82A7D1CD400F0B20E /* ResultTypeEnum.swift */; };
@@ -40,7 +39,6 @@
 		6F4DF4CB2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6F4DF4CC2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceDetailTableViewCell.xib; sourceTree = "<group>"; };
 		6F4DF4CF2A7CD96000F0B20E /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
-		6F4DF4D12A7D03CE00F0B20E /* InvoiceDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailVM.swift; sourceTree = "<group>"; };
 		6F4DF4D62A7D1BE600F0B20E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6F4DF4D82A7D1CD400F0B20E /* ResultTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTypeEnum.swift; sourceTree = "<group>"; };
 		6F4DF4DA2A7D1CEC00F0B20E /* ErrorTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypeEnum.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 				6F4DF4CA2A7CCB7E00F0B20E /* cell */,
 				6F5654002A7C623200675EB4 /* InvoiceDetailVC.swift */,
 				6F5654012A7C623200675EB4 /* InvoiceDetailVC.xib */,
-				6F4DF4D12A7D03CE00F0B20E /* InvoiceDetailVM.swift */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -315,7 +312,6 @@
 				6F4DF4D02A7CD96000F0B20E /* CustomHeaderView.swift in Sources */,
 				6FF397B32A7AAA0E00C03951 /* BaseVC.swift in Sources */,
 				6F5654022A7C623200675EB4 /* InvoiceDetailVC.swift in Sources */,
-				6F4DF4D22A7D03CE00F0B20E /* InvoiceDetailVM.swift in Sources */,
 				6F4DF4D92A7D1CD400F0B20E /* ResultTypeEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
