@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class InvoiceListVC: UIViewController {
+final class InvoiceListVC: BaseVC {
     @IBOutlet weak var paymentNotificationView: UIView!
     @IBOutlet weak var paymentNotificationLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
@@ -18,6 +18,7 @@ final class InvoiceListVC: UIViewController {
     private var viewModel = InvoiceListVM()
     public var contractInvoices : InvoiceResponseModel?
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareCustomView()
@@ -25,6 +26,7 @@ final class InvoiceListVC: UIViewController {
         preparePaymentNotificationView()
         prepareTableView()
         viewModel.delegate = self
+        indicator.startAnimating()
         viewModel.fetchInvoices()
         contractInvoices = viewModel.invoices
     }
@@ -33,6 +35,7 @@ final class InvoiceListVC: UIViewController {
 
 extension InvoiceListVC: InvoiceListVMDelegate {
     func invoicesLoaded() {
+        indicator.stopAnimating()
         tableView.reloadData()
         contractInvoices = viewModel.invoices
         preparePaymentNotificationView()

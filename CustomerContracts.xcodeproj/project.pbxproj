@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6F0685392A7E31B400D61344 /* CustomAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0685372A7E31B400D61344 /* CustomAlertVC.swift */; };
 		6F06853A2A7E31B400D61344 /* CustomAlertVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0685382A7E31B400D61344 /* CustomAlertVC.xib */; };
+		6F06853D2A7E5CC400D61344 /* MaterialActivityIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 6F06853C2A7E5CC400D61344 /* MaterialActivityIndicator */; };
 		6F4DF4CD2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CB2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.swift */; };
 		6F4DF4CE2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CC2A7CCBB900F0B20E /* InvoiceDetailTableViewCell.xib */; };
 		6F4DF4D02A7CD96000F0B20E /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DF4CF2A7CD96000F0B20E /* CustomHeaderView.swift */; };
@@ -66,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F06853D2A7E5CC400D61344 /* MaterialActivityIndicator in Frameworks */,
 				6F4DF4D52A7D1BC700F0B20E /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +236,7 @@
 			name = CustomerContracts;
 			packageProductDependencies = (
 				6F4DF4D42A7D1BC700F0B20E /* Alamofire */,
+				6F06853C2A7E5CC400D61344 /* MaterialActivityIndicator */,
 			);
 			productName = CustomerContracts;
 			productReference = 6FF397882A7A998B00C03951 /* CustomerContracts.app */;
@@ -265,6 +268,7 @@
 			mainGroup = 6FF3977F2A7A998B00C03951;
 			packageReferences = (
 				6F4DF4D32A7D1BC700F0B20E /* XCRemoteSwiftPackageReference "Alamofire" */,
+				6F06853B2A7E5CC400D61344 /* XCRemoteSwiftPackageReference "MaterialActivityIndicator" */,
 			);
 			productRefGroup = 6FF397892A7A998B00C03951 /* Products */;
 			projectDirPath = "";
@@ -517,6 +521,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6F06853B2A7E5CC400D61344 /* XCRemoteSwiftPackageReference "MaterialActivityIndicator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nspavlo/MaterialActivityIndicator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.7;
+			};
+		};
 		6F4DF4D32A7D1BC700F0B20E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -528,6 +540,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6F06853C2A7E5CC400D61344 /* MaterialActivityIndicator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F06853B2A7E5CC400D61344 /* XCRemoteSwiftPackageReference "MaterialActivityIndicator" */;
+			productName = MaterialActivityIndicator;
+		};
 		6F4DF4D42A7D1BC700F0B20E /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F4DF4D32A7D1BC700F0B20E /* XCRemoteSwiftPackageReference "Alamofire" */;
