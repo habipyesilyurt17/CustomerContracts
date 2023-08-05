@@ -29,6 +29,8 @@ final class InvoiceDetailVC: UIViewController {
     var choosenList: List?
     var choosenInvoices: [Invoice] = []
     private var viewModel = InvoiceDetailVM()
+    let maxLength = 11
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,8 +45,23 @@ final class InvoiceDetailVC: UIViewController {
         prepareDebtContainerView()
         prepareTableView()
         prepareListLabel()
+        prepareTcTextField()
+    }
+    
+    private func prepareTcTextField() {
+        tcTextField.delegate = self
+        tcTextField.keyboardType = .numberPad
+        tcTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if let text = textField.text, text.count > maxLength {
+            textField.deleteBackward()
+        }
     }
 }
+
+
 
 
 //Mark: - UI
@@ -176,4 +193,59 @@ extension InvoiceDetailVC: UITableViewDataSource {
 
         self.present(customAlertVC, animated: true, completion: nil)
     }
+}
+
+extension InvoiceDetailVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if let text = textField.text {
+            if text.isEmpty {
+                tcTextField.layer.borderColor = UIColor.systemGray5.cgColor
+                tcErrorLabel.text = ""
+            } else if text.count == maxLength {
+                let isValid = validateTurkishIDNumber(text)
+                updateUIForValidation(isValid)
+            }
+        }
+     }
+    
+    func updateUIForValidation(_ isValid: Bool) {
+        if isValid {
+            tcErrorLabel.isHidden = true
+        } else {
+            tcTextField.layer.borderWidth = 1.0
+            tcTextField.layer.borderColor = UIColor.red.cgColor
+            tcErrorLabel.isHidden = false
+            tcErrorLabel.text = "Girdiğiniz T.C. Kimlik numarası doğru değildir"
+            tcErrorLabel.textColor = UIColor.red
+        }
+    }
+    
+    func validateTurkishIDNumber(_ identityNumber: String) -> Bool {
+        let tcNumber = identityNumber.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard tcNumber.count == maxLength, let _ = Int(tcNumber) else {
+            return false
+        }
+        
+        guard tcNumber.first != "0" else {
+            return false
+        }
+        
+        let digits = tcNumber.compactMap { Int(String($0)) }
+        
+        let oddSum = digits.enumerated().filter { $0.offset % 2 == 0 && $0.offset < 9 }.map { $0.element }.reduce(0, +)
+        let evenSum = digits.enumerated().filter { $0.offset % 2 == 1 && $0.offset < 9 }.map { $0.element }.reduce(0, +)
+        let tenthDigit = (oddSum * 7 - evenSum) % 10
+        
+        let sumOfFirstTen = digits.prefix(10).reduce(0, +)
+        let eleventhDigit = sumOfFirstTen % 10
+        
+        return digits[9] == tenthDigit && digits[10] == eleventhDigit
+     }
 }
