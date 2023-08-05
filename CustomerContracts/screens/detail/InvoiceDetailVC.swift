@@ -147,6 +147,33 @@ extension InvoiceDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceDetailTableViewCell", for: indexPath) as! InvoiceDetailTableViewCell
         cell.configureCell(invoice: choosenInvoices[indexPath.row])
+        
+        cell.invoiceButtonTapped = { [weak self] documentNumber in
+            let title = "Döküman Numarası"
+            let message = "Bu faturaya ait döküman numarası \(documentNumber)’dir. Bu numaraya istinaden işlemlerinizi gerçekleştirebilirsiniz."
+            
+            self?.showCustomAlert(title: title, message: message)
+        }
+        
+        cell.paymentButtonTapped = { [weak self] dueDate in
+            let title = "Son Ödeme Tarihi"
+            let message = "Bu fatura \(dueDate) tarihine kadar ödenmesi gerekmektedir."
+            self?.showCustomAlert(title: title, message: message)
+        }
+        
         return cell
+    }
+    
+    func showCustomAlert(title: String, message: String) {
+        let customAlertVC = CustomAlertVC(nibName: "CustomAlertVC", bundle: nil)
+        customAlertVC.modalPresentationStyle = .overCurrentContext
+        customAlertVC.providesPresentationContextTransitionStyle = true
+        customAlertVC.definesPresentationContext = true
+        customAlertVC.modalTransitionStyle = .crossDissolve
+        
+        customAlertVC.customTitle  = title
+        customAlertVC.customMessage = message
+
+        self.present(customAlertVC, animated: true, completion: nil)
     }
 }

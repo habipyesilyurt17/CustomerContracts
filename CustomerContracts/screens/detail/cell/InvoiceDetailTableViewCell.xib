@@ -20,44 +20,34 @@
                         <rect key="frame" x="10" y="10" width="341" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TmP-rX-AVL">
-                                <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="85.666666666666671" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₺42850,99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qly-nO-ocY">
-                                <rect key="frame" x="98.666666666666686" y="0.0" width="89.333333333333314" height="30"/>
+                                <rect key="frame" x="95.666666666666686" y="0.0" width="86" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDV-vv-DCH">
-                                <rect key="frame" x="198" y="0.0" width="70.333333333333314" height="30"/>
+                                <rect key="frame" x="191.66666666666666" y="0.0" width="54" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="invoice"/>
                                 <connections>
                                     <action selector="invoiceButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="271-LR-Lfx"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="4hW-IE-00O">
-                                <rect key="frame" x="278.33333333333331" y="0.0" width="62.666666666666686" height="30"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Öde" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jZ-Ty-8Mn">
-                                        <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                        <color key="textColor" red="0.91764706370000004" green="0.74509805439999999" blue="0.36078432199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjS-pn-Crh">
-                                        <rect key="frame" x="31.666666666666686" y="0.0" width="31" height="30"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="right"/>
-                                        <connections>
-                                            <action selector="paymentButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FNq-gO-WjK"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iy-73-Dpx">
+                                <rect key="frame" x="255.66666666666671" y="0.0" width="85.333333333333343" height="30"/>
+                                <color key="tintColor" red="0.91764706370000004" green="0.74509805439999999" blue="0.36078432199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="right" imagePlacement="trailing" title="Öde" imagePadding="10" titleAlignment="center"/>
+                                <connections>
+                                    <action selector="paymentButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qZM-Wa-K3X"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -73,7 +63,7 @@
                 <outlet property="amountLabel" destination="qly-nO-ocY" id="ZUq-Et-POX"/>
                 <outlet property="dueDateLabel" destination="TmP-rX-AVL" id="ATE-m2-oMh"/>
                 <outlet property="invoiceButton" destination="eDV-vv-DCH" id="ofb-ST-dEV"/>
-                <outlet property="paymentButton" destination="cjS-pn-Crh" id="32X-1a-Ewd"/>
+                <outlet property="paymentButton" destination="5iy-73-Dpx" id="tjb-Bu-QrG"/>
             </connections>
             <point key="canvasLocation" x="-35.877862595419849" y="21.83098591549296"/>
         </tableViewCell>

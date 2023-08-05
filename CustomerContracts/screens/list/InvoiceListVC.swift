@@ -95,14 +95,18 @@ extension InvoiceListVC {
         
         guard let invoices = contractInvoices else { return }
         
-        let totalPrice =  invoices.totalPrice  //"12.454,10"
-        let totalPriceCount = invoices.totalPriceCount //5
+        let totalPrice =  invoices.totalPrice
+        let totalPriceCount = invoices.totalPriceCount
         paymentNotificationLabel.text = "Tüm sözleşme hesaplarınıza ait \(totalPriceCount) adet fatura bulunmaktadır."
         totalPriceLabel.text = "₺ \(totalPrice)"
     }
 }
 
 extension InvoiceListVC: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        346
+//    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.getInvoiceCount()
     }
@@ -116,11 +120,18 @@ extension InvoiceListVC: UITableViewDataSource {
     }
 }
 
-extension InvoiceListVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        tableView.rowHeight
-    }
+extension InvoiceListVC: UITableViewDelegate {    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerView = UIView()
+//        footerView.backgroundColor = .clear
+//        return footerView
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 30.0 // Hücreler arasına boşluk eklemek için footer yüksekliği
+//    }
 }
+
 
 
 extension InvoiceListVC: InvoiceTableViewCellDelegate {
