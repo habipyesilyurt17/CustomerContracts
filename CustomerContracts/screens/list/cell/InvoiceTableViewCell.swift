@@ -21,7 +21,7 @@ final class InvoiceTableViewCell: UITableViewCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var viewButton: UIButton!
     
-    weak var delegate: InvoiceTableViewCellDelegate?
+    var delegate: InvoiceTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,10 +61,10 @@ final class InvoiceTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        companyLabel.text = nil
-        addressLabel.text = nil
-        installationNumberLabel.text = nil
-        contractAccountNumberLabel.text = nil
-        amountLabel.text = nil
+        companyLabel.text = ""
+        addressLabel.text = ""
+        installationNumberLabel.text = ""
+        contractAccountNumberLabel.text = ""
+        amountLabel.text = ""
     }
 }

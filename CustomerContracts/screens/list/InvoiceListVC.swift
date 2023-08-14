@@ -7,78 +7,41 @@
 
 import UIKit
 
+protocol InvoiceListInterface: AnyObject {
+    var contractInvoices: InvoiceResponseModel? { get set }
+    
+    func prepareNavigation()
+    func preparePaymentNotificationView()
+    func prepareTableView()
+    func startIndicator()
+    func stopIndicator()
+}
+
 final class InvoiceListVC: BaseVC {
     @IBOutlet weak var paymentNotificationView: UIView!
     @IBOutlet weak var paymentNotificationLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    let customView = CustomView()
-    let titleLabel = UILabel()
 
-    private var viewModel = InvoiceListVM()
+
+    private lazy var viewModel = InvoiceListVM(view: self)
     public var contractInvoices : InvoiceResponseModel?
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareCustomView()
-        prepareTitleLabel()
-        preparePaymentNotificationView()
-        prepareTableView()
         viewModel.delegate = self
-        indicator.startAnimating()
-        viewModel.fetchInvoices()
-        contractInvoices = viewModel.invoices
-    }
-
-}
-
-extension InvoiceListVC: InvoiceListVMDelegate {
-    func invoicesLoaded() {
-        indicator.stopAnimating()
-        tableView.reloadData()
-        contractInvoices = viewModel.invoices
-        preparePaymentNotificationView()
+        viewModel.viewDidLoad()
     }
 }
 
 
 //Mark: - UI
-extension InvoiceListVC {
-    func prepareTableView() {
-        let cellNib = UINib(nibName: "InvoiceTableViewCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "InvoiceTableViewCell")
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.rowHeight = 346
-    }
-    
-    func prepareCustomView() {
-        customView.translatesAutoresizingMaskIntoConstraints = false
-         view.addSubview(customView)
-
-        customView.backgroundColor = UIColor.gradientColor(with: UIScreen.main.bounds)
-        
-        NSLayoutConstraint.activate([
-             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-             customView.topAnchor.constraint(equalTo: view.topAnchor),
-             customView.heightAnchor.constraint(equalToConstant: 88)
-         ])
-    }
-    
-    func prepareTitleLabel() {
-        titleLabel.text = "FATURA LİSTESİ"
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        customView.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: customView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: customView.topAnchor, constant: 60)
-        ])
+extension InvoiceListVC: InvoiceListInterface {
+    func prepareNavigation() {
+        let customHeaderView = CustomHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 88))
+        customHeaderView.setTitle("FATURA LİSTESİ")
+        view.addSubview(customHeaderView)
     }
     
     func preparePaymentNotificationView() {
@@ -98,26 +61,44 @@ extension InvoiceListVC {
         paymentNotificationLabel.text = "Tüm sözleşme hesaplarınıza ait \(totalPriceCount) adet fatura bulunmaktadır."
         totalPriceLabel.text = "₺ \(totalPrice)"
     }
+
+    func prepareTableView() {
+        let cellNib = UINib(nibName: "InvoiceTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "InvoiceTableViewCell")
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 346
+    }
+
+    func startIndicator() {
+        indicator.startAnimating()
+    }
+    
+    func stopIndicator() {
+        indicator.stopAnimating()
+    }
 }
 
 extension InvoiceListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getInvoiceCount()
+        viewModel.numberOfItemsInSection()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceTableViewCell", for: indexPath) as! InvoiceTableViewCell
         guard let model = viewModel.getCompanyList(at: indexPath.row) else { return UITableViewCell() }
-        cell.delegate = self
         cell.configureCell(item: model)
+        cell.delegate = self
         return cell
     }
 }
 
-extension InvoiceListVC: UITableViewDelegate {
+extension InvoiceListVC: InvoiceListVMDelegate {
+    func invoicesFetched() {
+        tableView.reloadData()
+        preparePaymentNotificationView()
+    }
 }
-
-
 
 extension InvoiceListVC: InvoiceTableViewCellDelegate {
     func didTapButton(in cell: InvoiceTableViewCell) {

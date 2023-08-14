@@ -8,11 +8,11 @@
 import Foundation
 import Alamofire
 
-protocol NetworkManagerProtocol {
+protocol NetworkManagerInterface {
     func fetchInvoices(completion: @escaping (ResultTypeEnum<InvoiceResponseModel>) -> Void)
 }
 
-class NetworkManager: NetworkManagerProtocol {
+class NetworkManager: NetworkManagerInterface {
     static let shared = NetworkManager()
     
     private init () {}

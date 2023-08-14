@@ -23,9 +23,7 @@ final class InvoiceDetailVC: UIViewController {
     @IBOutlet weak var plumbingDetailView: UIView!
     @IBOutlet weak var debtContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
-  
-    let customView = CustomView()
-    
+      
     var choosenList: List?
     var choosenInvoices: [Invoice] = []
     let maxLength = 11
@@ -33,8 +31,7 @@ final class InvoiceDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        prepareCustomView()
-        prepareNavigationItem()
+        prepareNavigation()
         prepareErrorLabel()
     }
         
@@ -65,6 +62,20 @@ final class InvoiceDetailVC: UIViewController {
 
 //Mark: - UI
 extension InvoiceDetailVC {
+    func prepareNavigation() {
+        let customHeaderView = CustomHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 88))
+        customHeaderView.setTitle("FATURA DETAYI")
+        view.addSubview(customHeaderView)
+
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .white
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func prepareListLabel() {
         companyLabel.text = choosenList?.company
         addressLabel.text = choosenList?.address
@@ -72,41 +83,6 @@ extension InvoiceDetailVC {
         contractAccountNumberLabel.text = choosenList?.contractAccountNumber
         amountLabel.text = choosenList?.amount
         contractContentLabel.text = "Seçili sözleşme hesabınıza ait \(choosenInvoices.count) adet ödenmemiş fatura bulunmaktadır."
-    }
-    
-    func prepareCustomView() {
-        customView.translatesAutoresizingMaskIntoConstraints = false
-         view.addSubview(customView)
-
-        customView.backgroundColor = UIColor.gradientColor(with: UIScreen.main.bounds)
-        
-        NSLayoutConstraint.activate([
-             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-             customView.topAnchor.constraint(equalTo: view.topAnchor),
-             customView.heightAnchor.constraint(equalToConstant: 90)
-         ])
-    }
-    
-    func prepareNavigationItem() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-        let backButtonImage = UIImage(named: "back")
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
-        backButton.tintColor = .white
-        navigationItem.leftBarButtonItem = backButton
-        
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "FATURA DETAYI"
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
-        navigationItem.titleView = titleLabel
-    }
-    
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
     }
     
     func prepareErrorLabel() {
@@ -143,7 +119,7 @@ extension InvoiceDetailVC {
 extension InvoiceDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let headerView = CustomHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 46.0))
+            let headerView = CustomTableViewHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 46.0))
             return headerView
         }
         return nil
