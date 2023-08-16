@@ -11,7 +11,6 @@ protocol InvoiceListInterface: AnyObject {
     var contractInvoices: InvoiceResponseModel? { get set }
     
     func prepareNavigation()
-    func preparePaymentNotificationView()
     func prepareTableView()
     func startIndicator()
     func stopIndicator()
@@ -43,31 +42,24 @@ extension InvoiceListVC: InvoiceListInterface {
         customHeaderView.setTitle("FATURA LİSTESİ")
         view.addSubview(customHeaderView)
     }
+
+    func prepareTableView() {
+        let cellNib = UINib(nibName: "InvoiceTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "InvoiceTableViewCell")
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        preparePaymentNotificationView()
+        tableView.tableHeaderView = paymentNotificationView
+    }
     
-    func preparePaymentNotificationView() {
+    private func preparePaymentNotificationView() {
         paymentNotificationView.layer.cornerRadius = 10
         paymentNotificationView.layer.shadowColor = UIColor.black.cgColor
         paymentNotificationView.layer.shadowOpacity = 0.2
         paymentNotificationView.layer.shadowOffset = CGSize(width: 5, height: 5)
         paymentNotificationView.layer.shadowRadius = 20
         paymentNotificationView.layer.shadowPath = UIBezierPath(roundedRect: paymentNotificationView.bounds, cornerRadius: paymentNotificationView.layer.cornerRadius).cgPath
-
-        view.addSubview(paymentNotificationView)
-        
-        guard let invoices = contractInvoices else { return }
-        
-        let totalPrice =  invoices.totalPrice
-        let totalPriceCount = invoices.totalPriceCount
-        paymentNotificationLabel.text = "Tüm sözleşme hesaplarınıza ait \(totalPriceCount) adet fatura bulunmaktadır."
-        totalPriceLabel.text = "₺ \(totalPrice)"
-    }
-
-    func prepareTableView() {
-        let cellNib = UINib(nibName: "InvoiceTableViewCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "InvoiceTableViewCell")
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.rowHeight = 346
     }
 
     func startIndicator() {
@@ -93,10 +85,24 @@ extension InvoiceListVC: UITableViewDataSource {
     }
 }
 
+extension InvoiceListVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        20.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        346.0
+    }
+}
+
 extension InvoiceListVC: InvoiceListVMDelegate {
     func invoicesFetched() {
+        guard let invoices = contractInvoices else { return }
+        let totalPrice =  invoices.totalPrice
+        let totalPriceCount = invoices.totalPriceCount
+        paymentNotificationLabel.text = "Tüm sözleşme hesaplarınıza ait \(totalPriceCount) adet fatura bulunmaktadır."
+        totalPriceLabel.text = "₺ \(totalPrice)"
         tableView.reloadData()
-        preparePaymentNotificationView()
     }
 }
 

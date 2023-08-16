@@ -106,14 +106,11 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tesisat Numarası:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDl-Sb-NrQ">
                                                         <rect key="frame" x="0.0" y="0.0" width="177.66666666666666" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="177.66666666666666" id="3ki-0U-UVg"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I1u-wy-QpS">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I1u-wy-QpS">
                                                         <rect key="frame" x="177.66666666666666" y="0.0" width="122.33333333333334" height="24"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400XXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqd-r5-4tX">
@@ -142,20 +139,20 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKV-Wt-bBe" userLabel="Sözleşme View">
                                         <rect key="frame" x="0.0" y="174" width="300" height="48"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hlh-rx-59D">
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hlh-rx-59D">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rwM-bF-FRO">
-                                                        <rect key="frame" x="0.0" y="0.0" width="170.66666666666666" height="36"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="170.66666666666666" height="48"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sözleşme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DR1-Cd-Rra">
-                                                                <rect key="frame" x="0.0" y="0.0" width="170.66666666666666" height="18"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Sözleşme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DR1-Cd-Rra">
+                                                                <rect key="frame" x="0.0" y="0.0" width="170.66666666666666" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hesap Numarası:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oy9-ys-XE5">
-                                                                <rect key="frame" x="0.0" y="18" width="170.66666666666666" height="18"/>
+                                                                <rect key="frame" x="0.0" y="30" width="170.66666666666666" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -163,16 +160,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lzS-cj-dL0">
-                                                        <rect key="frame" x="170.66666666666663" y="10" width="129.33333333333337" height="18"/>
+                                                        <rect key="frame" x="170.66666666666663" y="10" width="129.33333333333337" height="38"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123XXXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXa-dJ-BKF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="38"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="copy" translatesAutoresizingMaskIntoConstraints="NO" id="iIU-z3-UnE">
-                                                                <rect key="frame" x="114.33333333333334" y="0.0" width="15" height="18"/>
+                                                                <rect key="frame" x="114.33333333333334" y="0.0" width="15" height="38"/>
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>

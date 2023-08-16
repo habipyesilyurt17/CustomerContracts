@@ -22,8 +22,11 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="clW-DU-1cP">
+                    <rect key="frame" x="30" y="89" width="333" height="729"/>
+                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xck-aV-VdZ" userLabel="PaymentNotificationView">
-                    <rect key="frame" x="30" y="124" width="333" height="104"/>
+                    <rect key="frame" x="30" y="89" width="333" height="104"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HkI-MG-B5B">
                             <rect key="frame" x="12" y="12" width="309" height="80"/>
@@ -83,22 +86,19 @@
                         <constraint firstAttribute="bottom" secondItem="HkI-MG-B5B" secondAttribute="bottom" constant="12" id="lc8-zG-RZr"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="clW-DU-1cP">
-                    <rect key="frame" x="30" y="258" width="333" height="560"/>
-                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="clW-DU-1cP" secondAttribute="bottom" id="0Dd-vc-CoK"/>
-                <constraint firstItem="xck-aV-VdZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="F2H-2a-Cu3"/>
-                <constraint firstItem="clW-DU-1cP" firstAttribute="top" secondItem="xck-aV-VdZ" secondAttribute="bottom" constant="30" id="JY7-S8-v80"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xck-aV-VdZ" secondAttribute="trailing" constant="30" id="LZS-bj-0Fb"/>
-                <constraint firstItem="xck-aV-VdZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="124" id="SIc-yW-pmf"/>
+                <constraint firstItem="clW-DU-1cP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="B7c-cH-FJg"/>
                 <constraint firstItem="clW-DU-1cP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="cz2-q6-p76"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="clW-DU-1cP" secondAttribute="trailing" constant="30" id="er7-T4-abK"/>
+                <constraint firstItem="xck-aV-VdZ" firstAttribute="top" secondItem="clW-DU-1cP" secondAttribute="top" id="lfa-du-cAs"/>
+                <constraint firstAttribute="trailing" secondItem="xck-aV-VdZ" secondAttribute="trailing" constant="30" id="qiQ-vc-mBW"/>
+                <constraint firstItem="xck-aV-VdZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="wjQ-lj-Gh7"/>
             </constraints>
-            <point key="canvasLocation" x="-89" y="20"/>
+            <point key="canvasLocation" x="-89.312977099236633" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>

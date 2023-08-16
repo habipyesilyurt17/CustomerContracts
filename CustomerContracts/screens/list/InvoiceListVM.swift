@@ -9,6 +9,7 @@ import UIKit
 
 protocol InvoiceListVMInterface {    
     func viewDidLoad()
+    func numberOfSections() -> Int
     func numberOfItemsInSection() -> Int
     func getCompanyList(at index: Int) -> List?
 }
@@ -50,9 +51,12 @@ final class InvoiceListVM {
 extension InvoiceListVM: InvoiceListVMInterface {    
     func viewDidLoad() {
         view?.prepareNavigation()
-        view?.preparePaymentNotificationView()
         view?.prepareTableView()
         fetchInvoices()
+    }
+    
+    func numberOfSections() -> Int {
+        self.invoices?.list.count ?? 0
     }
     
     func numberOfItemsInSection() -> Int {
