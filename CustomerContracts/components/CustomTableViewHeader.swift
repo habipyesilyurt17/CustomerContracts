@@ -13,7 +13,6 @@ class CustomTableViewHeader: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.textAlignment = .center
-//        label.font = .systemFont(ofSize: 15, weight: .bold)
         
         let attributedText = NSMutableAttributedString(string: "Vade\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
         attributedText.append(NSAttributedString(string: "Tarihi", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)]))
@@ -26,7 +25,7 @@ class CustomTableViewHeader: UIView {
          label.translatesAutoresizingMaskIntoConstraints = false
          label.numberOfLines = 2
          label.textAlignment = .center
-//         label.font = .systemFont(ofSize: 15, weight: .bold)
+
          let attributedText = NSMutableAttributedString(string: "Ödenecek\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
          attributedText.append(NSAttributedString(string: "Tutar", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)]))
          label.attributedText = attributedText
@@ -39,7 +38,6 @@ class CustomTableViewHeader: UIView {
         addSubview(dueDateLabel)
         addSubview(amountPayableLabel)
         
-        // Add constraints to position the labels within the header view
         NSLayoutConstraint.activate([
             dueDateLabel.topAnchor.constraint(equalTo: topAnchor, constant: -8),
             dueDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),

@@ -7,6 +7,18 @@
 
 import UIKit
 
+protocol InvoiceDetailInterface: AnyObject {
+    var choosenInvoices: [Invoice] { get set }
+    
+    func prepareNavigation()
+    func prepareErrorLabel()
+    func preparePlumbingDetailView()
+    func prepareDebtContainerView()
+    func prepareTableView()
+    func prepareListLabel()
+    func prepareTcTextField()
+}
+
 final class InvoiceDetailVC: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var tcTextField: UITextField!
@@ -23,6 +35,8 @@ final class InvoiceDetailVC: UIViewController {
     @IBOutlet weak var plumbingDetailView: UIView!
     @IBOutlet weak var debtContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    
+    private lazy var viewModel = InvoiceDetailVM(view: self)
       
     var choosenList: List?
     var choosenInvoices: [Invoice] = []
@@ -31,37 +45,18 @@ final class InvoiceDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        prepareNavigation()
-        prepareErrorLabel()
+        viewModel.viewWillAppear()
     }
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        preparePlumbingDetailView()
-        prepareDebtContainerView()
-        prepareTableView()
-        prepareListLabel()
-        prepareTcTextField()
-    }
-    
-    private func prepareTcTextField() {
-        tcTextField.delegate = self
-        tcTextField.keyboardType = .numberPad
-        tcTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if let text = textField.text, text.count > maxLength {
-            textField.deleteBackward()
-        }
+        viewModel.viewDidLoad()
+        viewModel.delegate = self
     }
 }
 
-
-
-
 //Mark: - UI
-extension InvoiceDetailVC {
+extension InvoiceDetailVC: InvoiceDetailInterface {
     func prepareNavigation() {
         let customHeaderView = CustomHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 88))
         customHeaderView.setTitle("FATURA DETAYI")
@@ -74,15 +69,6 @@ extension InvoiceDetailVC {
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
-    }
-    
-    private func prepareListLabel() {
-        companyLabel.text = choosenList?.company
-        addressLabel.text = choosenList?.address
-        installationNumberLabel.text = choosenList?.installationNumber
-        contractAccountNumberLabel.text = choosenList?.contractAccountNumber
-        amountLabel.text = choosenList?.amount
-        contractContentLabel.text = "Seçili sözleşme hesabınıza ait \(choosenInvoices.count) adet ödenmemiş fatura bulunmaktadır."
     }
     
     func prepareErrorLabel() {
@@ -113,63 +99,46 @@ extension InvoiceDetailVC {
         tableView.dataSource = self
         tableView.delegate = self
     }
-
+    
+    func prepareListLabel() {
+        companyLabel.text = choosenList?.company
+        addressLabel.text = choosenList?.address
+        installationNumberLabel.text = choosenList?.installationNumber
+        contractAccountNumberLabel.text = choosenList?.contractAccountNumber
+        amountLabel.text = choosenList?.amount
+        contractContentLabel.text = "Seçili sözleşme hesabınıza ait \(choosenInvoices.count) adet ödenmemiş fatura bulunmaktadır."
+    }
+    
+    func prepareTcTextField() {
+        tcTextField.delegate = self
+        tcTextField.keyboardType = .numberPad
+        tcTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        viewModel.textFieldDidChange(textField)
+    }
 }
 
 extension InvoiceDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            let headerView = CustomTableViewHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 46.0))
-            return headerView
-        }
-        return nil
+        viewModel.viewForHeaderInSection(tableView: tableView, section: section)
     }
 }
 
 extension InvoiceDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        choosenInvoices.count
+        viewModel.numberOfRowsInSection()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "InvoiceDetailTableViewCell", for: indexPath) as! InvoiceDetailTableViewCell
-        cell.configureCell(invoice: choosenInvoices[indexPath.row])
-        
-        cell.invoiceButtonTapped = { [weak self] documentNumber in
-            let title = "Döküman Numarası"
-            let message = "Bu faturaya ait döküman numarası \(documentNumber)’dir. Bu numaraya istinaden işlemlerinizi gerçekleştirebilirsiniz."
-            
-            self?.showCustomAlert(title: title, message: message)
-        }
-        
-        cell.paymentButtonTapped = { [weak self] dueDate in
-            let title = "Son Ödeme Tarihi"
-            let message = "Bu fatura \(dueDate) tarihine kadar ödenmesi gerekmektedir."
-            self?.showCustomAlert(title: title, message: message)
-        }
-        
-        return cell
-    }
-    
-    func showCustomAlert(title: String, message: String) {
-        let customAlertVC = CustomAlertVC(nibName: "CustomAlertVC", bundle: nil)
-        customAlertVC.modalPresentationStyle = .overCurrentContext
-        customAlertVC.providesPresentationContextTransitionStyle = true
-        customAlertVC.definesPresentationContext = true
-        customAlertVC.modalTransitionStyle = .crossDissolve
-        
-        customAlertVC.customTitle  = title
-        customAlertVC.customMessage = message
-
-        self.present(customAlertVC, animated: true, completion: nil)
+        viewModel.cellForItemAt(at: indexPath, tableView: tableView)
     }
 }
 
 extension InvoiceDetailVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits
-        let characterSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: characterSet)
+        viewModel.textField(textField, replacementString: string)
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -178,7 +147,7 @@ extension InvoiceDetailVC: UITextFieldDelegate {
                 tcTextField.layer.borderColor = UIColor.systemGray5.cgColor
                 tcErrorLabel.text = ""
             } else if text.count == maxLength {
-                let isValid = validateTurkishIDNumber(text)
+                let isValid = viewModel.validateTurkishIDNumber(text)
                 updateUIForValidation(isValid)
             }
         }
@@ -189,33 +158,24 @@ extension InvoiceDetailVC: UITextFieldDelegate {
             tcErrorLabel.isHidden = true
         } else {
             tcTextField.layer.borderWidth = 1.0
+            tcTextField.layer.cornerRadius = 5
             tcTextField.layer.borderColor = UIColor.red.cgColor
             tcErrorLabel.isHidden = false
-            tcErrorLabel.text = "Girdiğiniz T.C. Kimlik numarası doğru değildir"
+            tcErrorLabel.text = Constants.TC_Error_Message
             tcErrorLabel.textColor = UIColor.red
         }
     }
-    
-    func validateTurkishIDNumber(_ identityNumber: String) -> Bool {
-        let tcNumber = identityNumber.trimmingCharacters(in: .whitespacesAndNewlines)
+}
 
-        guard tcNumber.count == maxLength, let _ = Int(tcNumber) else {
-            return false
-        }
-        
-        guard tcNumber.first != "0" else {
-            return false
-        }
-        
-        let digits = tcNumber.compactMap { Int(String($0)) }
-        
-        let oddSum = digits.enumerated().filter { $0.offset % 2 == 0 && $0.offset < 9 }.map { $0.element }.reduce(0, +)
-        let evenSum = digits.enumerated().filter { $0.offset % 2 == 1 && $0.offset < 9 }.map { $0.element }.reduce(0, +)
-        let tenthDigit = (oddSum * 7 - evenSum) % 10
-        
-        let sumOfFirstTen = digits.prefix(10).reduce(0, +)
-        let eleventhDigit = sumOfFirstTen % 10
-        
-        return digits[9] == tenthDigit && digits[10] == eleventhDigit
-     }
+extension InvoiceDetailVC: InvoiceDetailVMDelegate {
+    func showCustomAlert(title: String, message: String) {
+        let customAlertVC = CustomAlertVC(nibName: "CustomAlertVC", bundle: nil)
+        customAlertVC.modalPresentationStyle = .overCurrentContext
+        customAlertVC.providesPresentationContextTransitionStyle = true
+        customAlertVC.definesPresentationContext = true
+        customAlertVC.modalTransitionStyle = .crossDissolve
+        customAlertVC.customTitle  = title
+        customAlertVC.customMessage = message
+        present(customAlertVC, animated: true, completion: nil)
+    }
 }

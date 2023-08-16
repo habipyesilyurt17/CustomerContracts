@@ -100,7 +100,7 @@ extension InvoiceListVC: InvoiceListVMDelegate {
         guard let invoices = contractInvoices else { return }
         let totalPrice =  invoices.totalPrice
         let totalPriceCount = invoices.totalPriceCount
-        paymentNotificationLabel.text = "Tüm sözleşme hesaplarınıza ait \(totalPriceCount) adet fatura bulunmaktadır."
+        paymentNotificationLabel.text = Constants.paymentNotificationMessage(totalPriceCount: totalPriceCount)
         totalPriceLabel.text = "₺ \(totalPrice)"
         tableView.reloadData()
     }

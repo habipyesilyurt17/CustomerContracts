@@ -25,20 +25,11 @@ class InvoiceDetailTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        preparePaymentButton()
     }
-    
-    private func preparePaymentButton() {
-//        paymentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: paymentButton.frame.size.width - image!.size.width, bottom: 0, right: 0)
-//        paymentButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -image!.size.width, bottom: 0, right: image!.size.width)
-    }
-    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
-    
     
     @IBAction func invoiceButtonTapped(_ sender: Any) {
         invoiceButtonTapped?(documentNumber)
